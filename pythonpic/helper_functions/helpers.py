@@ -82,8 +82,9 @@ def git_version() -> str:
     str
         The current seven first characters of the current git version hash.
     """
-    return subprocess.check_output(['git', 'describe', '--always']).decode()[:-1]
-
+    #oblandino
+    #return subprocess.check_output(['git', 'describe', '--always']).decode()[:-1]
+    return "git_version"
 
 def calculate_particle_iter_step(NT, f=np.log2):
     """
