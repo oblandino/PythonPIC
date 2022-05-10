@@ -10,7 +10,6 @@ n_particles = [100]
 list_particles = []
 list_cells = []
 list_runtimes = []
-
 for number_particles in n_particles:
     # s = initial(f"{number_particles}_{number_grid}", number_particles,
     #             number_grid).lazy_run()
