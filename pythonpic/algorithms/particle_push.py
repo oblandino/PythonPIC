@@ -2,6 +2,8 @@
 """mathematical algorithms for the particle pusher, Leapfrog and Boris"""
 import numpy as np
 from numba import jit, njit
+import pymp
+import time
 
 @jit()
 def boris_velocity_kick(v, eff_q, E, B, dt, eff_m):
@@ -76,7 +78,19 @@ def rela_boris_velocity_kick(v, c, eff_q, E, B, dt, eff_m):
     """
     # calculate u
     v /= np.sqrt(1 - (v ** 2).sum(axis=1, keepdims=True) / c ** 2)  # below eq 22 LPIC
-    half_force = (eff_q * 0.5 / eff_m * dt) * E  # eq. 21 LPIC # array of shape (N_particles, 3)
+
+    half_force = pymp.shared.array((100,3), dtype='uint8')
+
+    #start_time = time.time()
+
+    with pymp.Parallel(4) as p:
+        for i in p.range(100):
+            half_force[i]= (eff_q * 0.5 / eff_m * dt) * E[i]
+
+    #runtime = time.time() - start_time
+    #print("Runtime: ", runtime)
+
+    #half_force = (eff_q * 0.5 / eff_m * dt) * E  # eq. 21 LPIC # array of shape (N_particles, 3)
     # add first half of electric force
 
     # calculate uminus: initial velocity with added half impulse

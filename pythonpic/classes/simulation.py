@@ -190,10 +190,8 @@ class Simulation:
         """
         self.grid_species_initialization()
         start_time = time.time()
-        #oblandino
-        with pymp.Parallel(1) as p:
-            for i in p.range(self.NT):
-                self.iteration_lite(i)
+        for i in range(self.NT):
+            self.iteration_lite(i)
         self.runtime = time.time() - start_time
         print("Runtime: ", self.runtime)
         return self.runtime

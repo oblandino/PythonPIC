@@ -36,7 +36,7 @@ def FourierLongitudinalSolver(rho, k, epsilon_0=1, neutralize=True):
     return field
 
 
-@numba.njit()
+#@numba.njit()
 def BunemanTransversalSolver(electric_field, magnetic_field, current_yz, dt, c, epsilon_0):
     """
 
@@ -73,7 +73,7 @@ def BunemanTransversalSolver(electric_field, magnetic_field, current_yz, dt, c, 
     magnetic_field[:, 1] = (Gplus - Gminus) / c
     magnetic_field[:, 2] = (Fplus - Fminus) / c
 
-@numba.njit()
+#@numba.njit()
 def BunemanLongitudinalSolver(electric_field, current_x, dt, epsilon_0):
     electric_field[:, 0] -= dt / epsilon_0 * current_x[:-1]
 
