@@ -100,7 +100,14 @@ def rela_boris_velocity_kick(v, c, eff_q, E, B, dt, eff_m):
 
     # rotate to add magnetic field
     # this effectively takes relativistic mass into account
-    t = B * eff_q * dt / (2 * eff_m * np.sqrt(1 + (v ** 2).sum(axis=1, keepdims=True) / c ** 2))
+    #t = B * eff_q * dt / (2 * eff_m * np.sqrt(1 + (v ** 2).sum(axis=1, keepdims=True) / c ** 2))
+
+    t = pymp.shared.array((N, 3), dtype='float64')
+
+    with pymp.Parallel(4) as p:
+        for i in p.range(N):
+            t[i] = B[i] * eff_q * dt / (2 * eff_m * np.sqrt(1 + (v[i] ** 2).sum() / c ** 2))
+
     # u' = u- + u- x t
     uprime = v + np.cross(v, t)
     # rotate second time, by s = 2t/(1+t*t)
