@@ -2,7 +2,7 @@
 """mathematical algorithms for the particle pusher, Leapfrog and Boris"""
 import numpy as np
 from numba import jit, njit
-import pymp
+
 import time
 
 @jit()
@@ -81,7 +81,7 @@ def rela_boris_velocity_kick(v, c, eff_q, E, B, dt, eff_m):
 
     N = len(v)
 
-    half_force = pymp.shared.array((N,3), dtype='uint8')
+    half_force = np.ndarray(shape=(N,3), dtype='float64')
 
     #start_time = time.time()
 
@@ -102,7 +102,7 @@ def rela_boris_velocity_kick(v, c, eff_q, E, B, dt, eff_m):
     # this effectively takes relativistic mass into account
     #t = B * eff_q * dt / (2 * eff_m * np.sqrt(1 + (v ** 2).sum(axis=1, keepdims=True) / c ** 2))
 
-    t = pymp.shared.array((N, 3), dtype='float64')
+    t = np.ndarray(shape=(N,3), dtype='float64')
 
     #with pymp.Parallel(4) as p:
     for i in range(N):

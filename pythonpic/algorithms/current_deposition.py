@@ -1,6 +1,5 @@
 # coding=utf-8
 import numpy as np
-import pymp
 
 def current_deposition(j_x, j_yz, velocity, x_particles, dx, dt, q):
     epsilon = dx * 1e-10
@@ -62,10 +61,10 @@ def current_deposition(j_x, j_yz, velocity, x_particles, dx, dt, q):
 
         N = len(j_contribution)
 
-        y_contribution_to_current_cell = pymp.shared.array(N, dtype='float64')
-        z_contribution_to_current_cell = pymp.shared.array(N, dtype='float64')
-        y_contribution_to_next_cell = pymp.shared.array(N, dtype='float64')
-        z_contribution_to_next_cell = pymp.shared.array(N, dtype='float64')
+        y_contribution_to_current_cell = np.ndarray(shape=(N), dtype='float64')
+        z_contribution_to_current_cell = np.ndarray(shape=(N), dtype='float64')
+        y_contribution_to_next_cell = np.ndarray(shape=(N), dtype='float64')
+        z_contribution_to_next_cell = np.ndarray(shape=(N), dtype='float64')
 
         #with pymp.Parallel(4) as p:
         for i in range(N):
