@@ -1,5 +1,14 @@
 # coding=utf-8
 import numpy as np
+from multiprocessing import Process, Array
+
+def current_contribution(w, contribution, arr):
+    for i in range(len(contribution)):
+        arr[i] = w[i] * contribution[i]
+
+def next_contribution(w, contribution, arr):
+    for i in range(len(contribution)):
+        arr[i] = (1 - w[i]) * contribution[i]
 
 def current_deposition(j_x, j_yz, velocity, x_particles, dx, dt, q):
     epsilon = dx * 1e-10
@@ -53,30 +62,31 @@ def current_deposition(j_x, j_yz, velocity, x_particles, dx, dt, q):
 
         j_contribution = velocity * q / dt * time_in_this_iteration.reshape(x_velocity.size, 1)
 
-        #j_contribution = pymp.shared.array((N, 3), dtype='uint8')
-
-        #with pymp.Parallel(4) as p:
-        #for i in range(N):
-        #    j_contribution[i] = velocity[i] * q / dt * time_in_this_iteration[i]
-
         N = len(j_contribution)
 
-        y_contribution_to_current_cell = np.ndarray(shape=(N), dtype='float64')
-        z_contribution_to_current_cell = np.ndarray(shape=(N), dtype='float64')
-        y_contribution_to_next_cell = np.ndarray(shape=(N), dtype='float64')
-        z_contribution_to_next_cell = np.ndarray(shape=(N), dtype='float64')
+        w_arr = Array('f', w)
+        j_contribution_1 = Array('f', j_contribution[:,1])
+        j_contribution_2 = Array('f', j_contribution[:,2])
+        y_contribution_to_current_cell = Array('f', range(N))
+        z_contribution_to_current_cell = Array('f', range(N))
+        y_contribution_to_next_cell = Array('f', range(N))
+        z_contribution_to_next_cell = Array('f', range(N))
 
-        #with pymp.Parallel(4) as p:
-        for i in range(N):
-            y_contribution_to_current_cell[i] = w[i] * j_contribution[i,1]
-            z_contribution_to_current_cell[i] = w[i] * j_contribution[i,2]
-            y_contribution_to_next_cell[i] = (1 - w[i]) * j_contribution[i,1]
-            z_contribution_to_next_cell[i] = (1 - w[i]) * j_contribution[i,2]
+        p = Process(target=current_contribution, args=(w_arr, j_contribution_1, y_contribution_to_current_cell))
+        p.start()
+        p.join()
 
-        #y_contribution_to_current_cell = w * j_contribution[:,1]
-        #z_contribution_to_current_cell = w * j_contribution[:,2]
-        #y_contribution_to_next_cell = (1 - w) * j_contribution[:,1]
-        #z_contribution_to_next_cell = (1 - w) * j_contribution[:,2]
+        p = Process(target=current_contribution, args=(w_arr, j_contribution_2, z_contribution_to_current_cell))
+        p.start()
+        p.join()
+
+        p = Process(target=next_contribution, args=(w_arr, j_contribution_1, y_contribution_to_next_cell))
+        p.start()
+        p.join()
+
+        p = Process(target=next_contribution, args=(w_arr, j_contribution_2, z_contribution_to_next_cell))
+        p.start()
+        p.join()
 
         j_x += np.bincount(logical_coordinates_long + 1, j_contribution[:,0], minlength=j_x.size)
         j_yz[:, 0] += np.bincount(logical_coordinates_n + 2, y_contribution_to_current_cell, minlength=j_yz[:, 1].size)
