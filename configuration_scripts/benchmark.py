@@ -5,7 +5,7 @@ import itertools
 import pandas as pd
 
 number_grid = 1000
-n_particles = [100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000]
+n_particles = [100]
 
 list_particles = []
 list_cells = []
@@ -21,5 +21,5 @@ for number_particles in n_particles:
     list_runtimes.append(runtime)
 
 dict = {'n_particles':list_particles, 'n_grid': list_cells, 'runtime':list_runtimes}
-pd.DataFrame.from_dict(dict).to_csv('/home/oscar/Downloads/inz_data_jit.csv')
+pd.DataFrame.from_dict(dict).to_csv('/work/oblandino/data/inz_data_jit.csv')
 
