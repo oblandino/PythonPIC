@@ -1,0 +1,23 @@
+Instalation Notes for PythonPIC
+
+In Unix using Pycharm
+
+	1. Install Anaconda3-2021.11-Linux-x86_64.sh
+	2. Extract and install pycharm-community-2022.1.1.tar.gz
+	3. Open Pycharm: pycharm-community-2022.1/bin/pycharm.sh
+	4. Create a Conda Environment in Pycharm pointing to PythonPIC: /home/oscar/anaconda3/envs/PythonPIC/bin/python
+	5. Install required libraries from environment.yml
+	6. Create/Run a configuration with the test: PythonPIC/configuration_scripts/benchmark.py
+	7. Interpreter options for profiling: -B -m cProfile -o output.prof
+	8. Open profiling output: snakeviz output.prof
+	9. Profiling taken from: https://softwaretester.info/python-profiling-with-pycharm-community-edition/
+
+	
+In Kabre
+	
+        1. Install Anaconda3-2021.11-Linux-x86_64.sh
+	2. Create Conda env: conda env create -f environment.yml
+	3. Activate your env: conda activate pythonpic
+	3. Install pythonpic package: python setup.py install
+	4. Setup you PYTHONPATH: export PYTHONPATH=${PYTHONPATH}:${HOME}/PythonPIC
+ 
