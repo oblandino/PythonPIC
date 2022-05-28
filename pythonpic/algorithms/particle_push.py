@@ -49,7 +49,7 @@ def boris_velocity_kick(v, eff_q, E, B, dt, eff_m):
     return energy
 
 #@jit("f8(f8[:,:],f8,f8,f8[:,:],f8[:,:],f8,f8)")
-def rela_boris_velocity_kick(v, c, eff_q, E, B, dt, eff_m):
+def rela_boris_velocity_kick(v, c, eff_q, E, B, dt, eff_m, cores):
     """
     The velocity update portion of the Boris pusher. Updates the velocity in place so as to conserve memory.
 
@@ -152,7 +152,7 @@ def boris_push(species, E: np.ndarray, dt: float, B: np.ndarray):
     energy = boris_velocity_kick(species.v, species.eff_q,
                                  E, B, dt, species.eff_m)
     return energy
-def rela_boris_push(species, E: np.ndarray, dt: float, B: np.ndarray):
+def rela_boris_push(species, E: np.ndarray, dt: float, B: np.ndarray, cores):
     """
     Implements the relativistic Boris pusher.
     Mostly a wrapper function for the compiled version in `rela_boris_velocity_kick`.
@@ -178,6 +178,6 @@ def rela_boris_push(species, E: np.ndarray, dt: float, B: np.ndarray):
         Total kinetic energy of the particles.
     """
     energy = rela_boris_velocity_kick(species.v, species.c, species.eff_q,
-                                      E, B, dt, species.eff_m)
+                                      E, B, dt, species.eff_m, cores)
     return energy
 

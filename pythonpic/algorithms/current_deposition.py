@@ -2,7 +2,7 @@
 import numpy as np
 import pymp
 
-def current_deposition(j_x, j_yz, velocity, x_particles, dx, dt, q):
+def current_deposition(j_x, j_yz, velocity, x_particles, dx, dt, q, cores):
     epsilon = dx * 1e-10
     time = np.ones_like(x_particles) * dt
     active = np.any(velocity, axis=1)
@@ -67,7 +67,7 @@ def current_deposition(j_x, j_yz, velocity, x_particles, dx, dt, q):
         y_contribution_to_next_cell = pymp.shared.array(N, dtype='float64')
         z_contribution_to_next_cell = pymp.shared.array(N, dtype='float64')
 
-        with pymp.Parallel(4) as p:
+        with pymp.Parallel(cores) as p:
             for i in p.range(N):
                 y_contribution_to_current_cell[i] = w[i] * j_contribution[i,1]
                 z_contribution_to_current_cell[i] = w[i] * j_contribution[i,2]

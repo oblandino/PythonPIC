@@ -162,9 +162,9 @@ class Species:
     def kinetic_energy(self):
         return (self.gamma - 1).sum() * self.eff_m * self.c**2
 
-    def velocity_push(self, field_function, time_multiplier=1):
+    def velocity_push(self, field_function, cores, time_multiplier=1):
         E, B = field_function(self.x)
-        self.energy = rela_boris_push(self, E, time_multiplier * self.dt, B)
+        self.energy = rela_boris_push(self, E, time_multiplier * self.dt, B, cores)
 
     def position_push(self):
         self.x += self.v[:, 0] * self.dt
