@@ -20,4 +20,15 @@ In Kabre
 	3. Activate your env: conda activate pythonpic
 	3. Install pythonpic package: python setup.py install
 	4. Setup you PYTHONPATH: export PYTHONPATH=${PYTHONPATH}:${HOME}/PythonPIC
- 
+
+Kabre Commands
+
+	1. ssh oblandino@kabre.cenat.ac.cr
+	2. sinfo
+	3. squeue -u oblandino
+	4. scancel <jobid>
+	5. salloc 
+	6. salloc -p nu --nodelist=nu-6a.cnca
+	7. salloc -p nu --exclude=nu-4b.cnca
+	8. sinfo -p nu
+	9. Recommendation to use nu-6{a,b,c,d}.cnca  
