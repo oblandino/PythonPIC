@@ -2,7 +2,6 @@
 """mathematical algorithms for the particle pusher, Leapfrog and Boris"""
 import numpy as np
 from numba import jit, njit
-from multiprocessing import Pool, Array, Value
 
 import time
 
@@ -49,21 +48,6 @@ def boris_velocity_kick(v, eff_q, E, B, dt, eff_m):
     v[:] = v_new
     return energy
 
-def init(_half_force_0, _half_force_1, _half_force_2, _E_0, _E_1, _E_2, _constant_arr):
-    global half_force_0, half_force_1, half_force_2, E_0, E_1, E_2, constant_arr
-    half_force_0 = _half_force_0
-    half_force_1 = _half_force_1
-    half_force_2 = _half_force_2
-    E_0 = _E_0
-    E_1 = _E_1
-    E_2 = _E_2
-    constant_arr = _constant_arr
-
-def calculate_half_force(i):
-    half_force_0[i] = constant_arr[i] * E_0[i]
-    half_force_1[i] = constant_arr[i] * E_1[i]
-    half_force_2[i] = constant_arr[i] * E_2[i]
-
 #@jit("f8(f8[:,:],f8,f8,f8[:,:],f8[:,:],f8,f8)")
 def rela_boris_velocity_kick(v, c, eff_q, E, B, dt, eff_m):
     """
@@ -97,24 +81,7 @@ def rela_boris_velocity_kick(v, c, eff_q, E, B, dt, eff_m):
 
     N = len(v)
 
-    constant = (eff_q * 0.5 / eff_m * dt)
-
-    half_force_0 = Array('f', range(N))
-    half_force_1 = Array('f', range(N))
-    half_force_2 = Array('f', range(N))
-    E_0 = Array('f', E[:,0])
-    E_1 = Array('f', E[:,1])
-    E_2 = Array('f', E[:,2])
-    constant_arr = Array('f', np.full(N, constant))
-
-    #pp = Pool(initializer=init, initargs=(half_force_0, half_force_1, half_force_2, E_0, E_1, E_2, constant_arr))
-    #Pool(4)
-    #pp.map(calculate_half_force, range(N))
-
     half_force = np.ndarray(shape=(N,3), dtype='float64')
-    #np.insert(half_force, 0, half_force_0[:])
-    #np.insert(half_force, 1, half_force_1[:])
-    #np.insert(half_force, 2, half_force_2[:])
 
     #start_time = time.time()
 
