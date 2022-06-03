@@ -1,6 +1,7 @@
 # coding=utf-8
 import numpy as np
-from multiprocessing import Pool, Array
+#from multiprocessing import Pool, Array
+import torcpy as torc
 
 def init(_w_arr, _j_contribution_1, _j_contribution_2, _y_contribution_to_current_cell, _z_contribution_to_current_cell, _y_contribution_to_next_cell, _z_contribution_to_next_cell):
     global w_arr, j_contribution_1, j_contribution_2, y_contribution_to_current_cell, z_contribution_to_current_cell, y_contribution_to_next_cell, z_contribution_to_next_cell
@@ -74,18 +75,17 @@ def current_deposition(j_x, j_yz, velocity, x_particles, dx, dt, q):
 
         N = len(j_contribution)
 
-        w_arr = Array('f', w)
-        j_contribution_1 = Array('f', j_contribution[:,1])
-        j_contribution_2 = Array('f', j_contribution[:,2])
-        y_contribution_to_current_cell = Array('f', range(N))
-        z_contribution_to_current_cell = Array('f', range(N))
-        y_contribution_to_next_cell = Array('f', range(N))
-        z_contribution_to_next_cell = Array('f', range(N))
+        w_arr = np.ndarray(shape=(N), dtype='float64', buffer=w)
+        j_contribution_1 = np.ndarray(shape=(N), dtype='float64', buffer=(j_contribution[:,1]))
+        j_contribution_2 = np.ndarray(shape=(N), dtype='float64', buffer=(j_contribution[:,2]))
+        y_contribution_to_current_cell = np.ndarray(shape=(N), dtype='float64')
+        z_contribution_to_current_cell = np.ndarray(shape=(N), dtype='float64')
+        y_contribution_to_next_cell = np.ndarray(shape=(N), dtype='float64')
+        z_contribution_to_next_cell = np.ndarray(shape=(N), dtype='float64')
 
-        p = Pool(initializer=init, initargs=(w_arr, j_contribution_1, j_contribution_2, y_contribution_to_current_cell, z_contribution_to_current_cell, y_contribution_to_next_cell, z_contribution_to_next_cell))
-        Pool(4)
-        p.map(current_contribution, range(N))
-        p.map(next_contribution, range(N))
+        torc.init(initializer=init, initargs=(w_arr, j_contribution_1, j_contribution_2, y_contribution_to_current_cell, z_contribution_to_current_cell, y_contribution_to_next_cell, z_contribution_to_next_cell))
+        torc.map(current_contribution, range(N))
+        torc.map(next_contribution, range(N))
 
         j_x += np.bincount(logical_coordinates_long + 1, j_contribution[:,0], minlength=j_x.size)
         j_yz[:, 0] += np.bincount(logical_coordinates_n + 2, y_contribution_to_current_cell, minlength=j_yz[:, 1].size)
