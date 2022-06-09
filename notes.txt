@@ -11,7 +11,7 @@ In Unix using Pycharm
 	7. Interpreter options for profiling: -B -m cProfile -o output.prof
 	8. Open profiling output: snakeviz output.prof
 	9. Profiling taken from: https://softwaretester.info/python-profiling-with-pycharm-community-edition/
-
+	10. torcpy requires python3.7
 	
 In Kabre
 	
