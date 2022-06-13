@@ -31,4 +31,7 @@ Kabre Commands
 	6. salloc -p nu --nodelist=nu-6a.cnca
 	7. salloc -p nu --exclude=nu-4b.cnca
 	8. sinfo -p nu
-	9. Recommendation to use nu-6{a,b,c,d}.cnca  
+	9. Recommendation to use nu-6{a,b,c,d}.cnca 
+
+Run PYMP with fixed cores
+	1. taskset --cpu-list 0-3 python configuration_scripts/benchmark.py 4 
