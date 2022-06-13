@@ -85,7 +85,7 @@ def rela_boris_velocity_kick(v, c, eff_q, E, B, dt, eff_m, cores):
 
     #start_time = time.time()
 
-    with pymp.Parallel(4) as p:
+    with pymp.Parallel(cores) as p:
         for i in p.range(N):
             half_force[i]= (eff_q * 0.5 / eff_m * dt) * E[i]
 
@@ -104,7 +104,7 @@ def rela_boris_velocity_kick(v, c, eff_q, E, B, dt, eff_m, cores):
 
     t = pymp.shared.array((N, 3), dtype='float64')
 
-    with pymp.Parallel(4) as p:
+    with pymp.Parallel(cores) as p:
         for i in p.range(N):
             t[i] = B[i] * eff_q * dt / (2 * eff_m * np.sqrt(1 + (v[i] ** 2).sum() / c ** 2))
 
