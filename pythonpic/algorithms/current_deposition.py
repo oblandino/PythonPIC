@@ -59,23 +59,23 @@ def current_deposition(j_x, j_yz, velocity, x_particles, dx, dt, q):
         #for i in range(N):
         #    j_contribution[i] = velocity[i] * q / dt * time_in_this_iteration[i]
 
-        N = len(j_contribution)
+        #N = len(j_contribution)
 
-        y_contribution_to_current_cell = np.ndarray(shape=(N), dtype='float64')
+        #y_contribution_to_current_cell = np.ndarray(shape=(N), dtype='float64')
         #z_contribution_to_current_cell = np.ndarray(shape=(N), dtype='float64')
-        y_contribution_to_next_cell = np.ndarray(shape=(N), dtype='float64')
+        #y_contribution_to_next_cell = np.ndarray(shape=(N), dtype='float64')
         #z_contribution_to_next_cell = np.ndarray(shape=(N), dtype='float64')
 
         #with pymp.Parallel(4) as p:
-        for i in range(N):
-            y_contribution_to_current_cell[i] = w[i] * j_contribution[i,1]
+        #for i in range(N):
+        #    y_contribution_to_current_cell[i] = w[i] * j_contribution[i,1]
             #z_contribution_to_current_cell[i] = w[i] * j_contribution[i,2]
-            y_contribution_to_next_cell[i] = (1 - w[i]) * j_contribution[i,1]
+        #    y_contribution_to_next_cell[i] = (1 - w[i]) * j_contribution[i,1]
             #z_contribution_to_next_cell[i] = (1 - w[i]) * j_contribution[i,2]
 
-        #y_contribution_to_current_cell = w * j_contribution[:,1]
+        y_contribution_to_current_cell = w * j_contribution[:,1]
         z_contribution_to_current_cell = w * j_contribution[:,2]
-        #y_contribution_to_next_cell = (1 - w) * j_contribution[:,1]
+        y_contribution_to_next_cell = (1 - w) * j_contribution[:,1]
         z_contribution_to_next_cell = (1 - w) * j_contribution[:,2]
 
         j_x += np.bincount(logical_coordinates_long + 1, j_contribution[:,0], minlength=j_x.size)
