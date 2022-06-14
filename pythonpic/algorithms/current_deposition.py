@@ -83,7 +83,7 @@ def current_deposition(j_x, j_yz, velocity, x_particles, dx, dt, q):
         z_contribution_to_next_cell = Array('f', range(N))
 
         p = Pool(initializer=init, initargs=(w_arr, j_contribution_1, j_contribution_2, y_contribution_to_current_cell, z_contribution_to_current_cell, y_contribution_to_next_cell, z_contribution_to_next_cell))
-        Pool(4)
+        #Pool(1)
         p.map(current_contribution, range(N))
         p.map(next_contribution, range(N))
 

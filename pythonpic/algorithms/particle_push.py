@@ -2,9 +2,6 @@
 """mathematical algorithms for the particle pusher, Leapfrog and Boris"""
 import numpy as np
 from numba import jit, njit
-from multiprocessing import Pool, Array, Value
-
-import time
 
 @jit()
 def boris_velocity_kick(v, eff_q, E, B, dt, eff_m):
@@ -49,21 +46,6 @@ def boris_velocity_kick(v, eff_q, E, B, dt, eff_m):
     v[:] = v_new
     return energy
 
-def init(_half_force_0, _half_force_1, _half_force_2, _E_0, _E_1, _E_2, _constant_arr):
-    global half_force_0, half_force_1, half_force_2, E_0, E_1, E_2, constant_arr
-    half_force_0 = _half_force_0
-    half_force_1 = _half_force_1
-    half_force_2 = _half_force_2
-    E_0 = _E_0
-    E_1 = _E_1
-    E_2 = _E_2
-    constant_arr = _constant_arr
-
-def calculate_half_force(i):
-    half_force_0[i] = constant_arr[i] * E_0[i]
-    half_force_1[i] = constant_arr[i] * E_1[i]
-    half_force_2[i] = constant_arr[i] * E_2[i]
-
 #@jit("f8(f8[:,:],f8,f8,f8[:,:],f8[:,:],f8,f8)")
 def rela_boris_velocity_kick(v, c, eff_q, E, B, dt, eff_m):
     """
@@ -94,38 +76,7 @@ def rela_boris_velocity_kick(v, c, eff_q, E, B, dt, eff_m):
     """
     # calculate u
     v /= np.sqrt(1 - (v ** 2).sum(axis=1, keepdims=True) / c ** 2)  # below eq 22 LPIC
-
-    N = len(v)
-
-    constant = (eff_q * 0.5 / eff_m * dt)
-
-    half_force_0 = Array('f', range(N))
-    half_force_1 = Array('f', range(N))
-    half_force_2 = Array('f', range(N))
-    E_0 = Array('f', E[:,0])
-    E_1 = Array('f', E[:,1])
-    E_2 = Array('f', E[:,2])
-    constant_arr = Array('f', np.full(N, constant))
-
-    #pp = Pool(initializer=init, initargs=(half_force_0, half_force_1, half_force_2, E_0, E_1, E_2, constant_arr))
-    #Pool(4)
-    #pp.map(calculate_half_force, range(N))
-
-    half_force = np.ndarray(shape=(N,3), dtype='float64')
-    #np.insert(half_force, 0, half_force_0[:])
-    #np.insert(half_force, 1, half_force_1[:])
-    #np.insert(half_force, 2, half_force_2[:])
-
-    #start_time = time.time()
-
-    #with pymp.Parallel(4) as p:
-    for i in range(N):
-        half_force[i]= (eff_q * 0.5 / eff_m * dt) * E[i]
-
-    #runtime = time.time() - start_time
-    #print("Runtime: ", runtime)
-
-    #half_force = (eff_q * 0.5 / eff_m * dt) * E  # eq. 21 LPIC # array of shape (N_particles, 3)
+    half_force = (eff_q * 0.5 / eff_m * dt) * E  # eq. 21 LPIC # array of shape (N_particles, 3)
     # add first half of electric force
 
     # calculate uminus: initial velocity with added half impulse
@@ -133,14 +84,7 @@ def rela_boris_velocity_kick(v, c, eff_q, E, B, dt, eff_m):
 
     # rotate to add magnetic field
     # this effectively takes relativistic mass into account
-    #t = B * eff_q * dt / (2 * eff_m * np.sqrt(1 + (v ** 2).sum(axis=1, keepdims=True) / c ** 2))
-
-    t = np.ndarray(shape=(N,3), dtype='float64')
-
-    #with pymp.Parallel(4) as p:
-    for i in range(N):
-        t[i] = B[i] * eff_q * dt / (2 * eff_m * np.sqrt(1 + (v[i] ** 2).sum() / c ** 2))
-
+    t = B * eff_q * dt / (2 * eff_m * np.sqrt(1 + (v ** 2).sum(axis=1, keepdims=True) / c ** 2))
     # u' = u- + u- x t
     uprime = v + np.cross(v, t)
     # rotate second time, by s = 2t/(1+t*t)
