@@ -5,7 +5,7 @@ import itertools
 import pandas as pd
 
 number_grid = 1000
-n_particles = [100]
+n_particles = [10000]
 
 list_particles = []
 list_cells = []

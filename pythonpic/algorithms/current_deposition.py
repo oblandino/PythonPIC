@@ -70,8 +70,10 @@ def current_deposition(j_x, j_yz, velocity, x_particles, dx, dt, q):
         j_contribution_1 = Array('f', j_contribution[:,1])
         y_contribution_to_current_cell = Array('f', range(N))
 
-        with multiprocessing.Pool(initializer=init, initargs=(w_arr, j_contribution_1, y_contribution_to_current_cell)) as pool:
+        with multiprocessing.Pool(processes=4, initializer=init, initargs=(w_arr, j_contribution_1, y_contribution_to_current_cell)) as pool:
             pool.map(current_contribution, range(N))
+            pool.close()
+            pool.join()
 
         #y_contribution_to_current_cell = w * j_contribution[:,1]
         z_contribution_to_current_cell = w * j_contribution[:,2]
