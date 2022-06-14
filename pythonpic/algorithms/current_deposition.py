@@ -1,6 +1,7 @@
 # coding=utf-8
 import numpy as np
-from multiprocessing import Pool, Array
+import multiprocessing
+from multiprocessing import Array
 
 def init(_w_arr, _j_contribution_1, _y_contribution_to_current_cell):
     global w_arr, j_contribution_1, y_contribution_to_current_cell
@@ -69,9 +70,8 @@ def current_deposition(j_x, j_yz, velocity, x_particles, dx, dt, q):
         j_contribution_1 = Array('f', j_contribution[:,1])
         y_contribution_to_current_cell = Array('f', range(N))
 
-        p = Pool(initializer=init, initargs=(w_arr, j_contribution_1, y_contribution_to_current_cell))
-        #Pool(1)
-        p.map(current_contribution, range(N))
+        with multiprocessing.Pool(initializer=init, initargs=(w_arr, j_contribution_1, y_contribution_to_current_cell)) as pool:
+            pool.map(current_contribution, range(N))
 
         #y_contribution_to_current_cell = w * j_contribution[:,1]
         z_contribution_to_current_cell = w * j_contribution[:,2]
