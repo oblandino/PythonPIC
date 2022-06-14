@@ -2,23 +2,14 @@
 import numpy as np
 from multiprocessing import Pool, Array
 
-def init(_w_arr, _j_contribution_1, _j_contribution_2, _y_contribution_to_current_cell, _z_contribution_to_current_cell, _y_contribution_to_next_cell, _z_contribution_to_next_cell):
-    global w_arr, j_contribution_1, j_contribution_2, y_contribution_to_current_cell, z_contribution_to_current_cell, y_contribution_to_next_cell, z_contribution_to_next_cell
+def init(_w_arr, _j_contribution_1, _y_contribution_to_current_cell):
+    global w_arr, j_contribution_1, y_contribution_to_current_cell
     w_arr = _w_arr
     j_contribution_1 = _j_contribution_1
-    j_contribution_2 = _j_contribution_2
     y_contribution_to_current_cell = _y_contribution_to_current_cell
-    z_contribution_to_current_cell = _z_contribution_to_current_cell
-    y_contribution_to_next_cell = _y_contribution_to_next_cell
-    z_contribution_to_next_cell = _z_contribution_to_next_cell
 
 def current_contribution(i):
     y_contribution_to_current_cell[i] = w_arr[i] * j_contribution_1[i]
-    z_contribution_to_current_cell[i] = w_arr[i] * j_contribution_2[i]
-
-def next_contribution(i):
-    y_contribution_to_next_cell[i] = (1 - w_arr[i]) * j_contribution_1[i]
-    z_contribution_to_next_cell[i] = (1 - w_arr[i]) * j_contribution_2[i]
 
 def current_deposition(j_x, j_yz, velocity, x_particles, dx, dt, q):
     epsilon = dx * 1e-10
@@ -76,16 +67,16 @@ def current_deposition(j_x, j_yz, velocity, x_particles, dx, dt, q):
 
         w_arr = Array('f', w)
         j_contribution_1 = Array('f', j_contribution[:,1])
-        j_contribution_2 = Array('f', j_contribution[:,2])
         y_contribution_to_current_cell = Array('f', range(N))
-        z_contribution_to_current_cell = Array('f', range(N))
-        y_contribution_to_next_cell = Array('f', range(N))
-        z_contribution_to_next_cell = Array('f', range(N))
 
-        p = Pool(initializer=init, initargs=(w_arr, j_contribution_1, j_contribution_2, y_contribution_to_current_cell, z_contribution_to_current_cell, y_contribution_to_next_cell, z_contribution_to_next_cell))
+        p = Pool(initializer=init, initargs=(w_arr, j_contribution_1, y_contribution_to_current_cell))
         #Pool(1)
         p.map(current_contribution, range(N))
-        p.map(next_contribution, range(N))
+
+        #y_contribution_to_current_cell = w * j_contribution[:,1]
+        z_contribution_to_current_cell = w * j_contribution[:,2]
+        y_contribution_to_next_cell = (1 - w) * j_contribution[:,1]
+        z_contribution_to_next_cell = (1 - w) * j_contribution[:,2]
 
         j_x += np.bincount(logical_coordinates_long + 1, j_contribution[:,0], minlength=j_x.size)
         j_yz[:, 0] += np.bincount(logical_coordinates_n + 2, y_contribution_to_current_cell, minlength=j_yz[:, 1].size)
