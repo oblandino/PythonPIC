@@ -12,8 +12,6 @@ from .species import load_species
 from ..helper_functions.helpers import report_progress, git_version, config_filename
 from ..visualization import animation, static_plots
 
-#oblandino
-import pymp
 
 current_time = time.strftime("%Y-%m-%d %H:%M")
 current_time_filename = time.strftime("%Y-%m-%d_%H-%M-%S")
