@@ -54,27 +54,15 @@ def current_deposition(j_x, j_yz, velocity, x_particles, dx, dt, q, cores):
 
         j_contribution = velocity * q / dt * time_in_this_iteration.reshape(x_velocity.size, 1)
 
-        #j_contribution = pymp.shared.array((N, 3), dtype='uint8')
+        N = len(j_contribution)
 
-        #with pymp.Parallel(4) as p:
-        #for i in range(N):
-        #    j_contribution[i] = velocity[i] * q / dt * time_in_this_iteration[i]
+        y_contribution_to_current_cell = pymp.shared.array(N, dtype='float64')
 
-        #N = len(j_contribution)
+        with pymp.Parallel(cores) as p:
+            for i in p.range(N):
+                y_contribution_to_current_cell[i] = w[i] * j_contribution[i,1]
 
-        #y_contribution_to_current_cell = pymp.shared.array(N, dtype='float64')
-        #z_contribution_to_current_cell = pymp.shared.array(N, dtype='float64')
-        #y_contribution_to_next_cell = pymp.shared.array(N, dtype='float64')
-        #z_contribution_to_next_cell = pymp.shared.array(N, dtype='float64')
-
-        #with pymp.Parallel(cores) as p:
-        #    for i in p.range(N):
-        #        y_contribution_to_current_cell[i] = w[i] * j_contribution[i,1]
-                #z_contribution_to_current_cell[i] = w[i] * j_contribution[i,2]
-        #        y_contribution_to_next_cell[i] = (1 - w[i]) * j_contribution[i,1]
-                #z_contribution_to_next_cell[i] = (1 - w[i]) * j_contribution[i,2]
-
-        y_contribution_to_current_cell = w * j_contribution[:,1]
+        #y_contribution_to_current_cell = w * j_contribution[:,1]
         z_contribution_to_current_cell = w * j_contribution[:,2]
         y_contribution_to_next_cell = (1 - w) * j_contribution[:,1]
         z_contribution_to_next_cell = (1 - w) * j_contribution[:,2]
