@@ -239,7 +239,7 @@ class Grid:
         if self.periodic and force_periodic:
             self.charge_density -= self.charge_density.mean()
 
-    def gather_current(self, list_species):
+    def gather_current(self, list_species, cores):
         """
         Gathers transversal and longitudinal current onto the Eulerian grid.
 
@@ -254,7 +254,7 @@ class Grid:
             current_deposition(self.current_density_x,
                                self.current_density_yz,
                                species.v, species.x,
-                               self.dx, self.dt, species.eff_q)
+                               self.dx, self.dt, species.eff_q, cores)
 
     def field_function(self, xp):
         """
@@ -400,8 +400,8 @@ class NonperiodicGrid(Grid):
         result[0] += result[-1]
         return result
 
-    def gather_current(self, list_species):
-        super().gather_current(list_species)
+    def gather_current(self, list_species, cores):
+        super().gather_current(list_species, cores)
         self.current_density_yz[:2] = 0
         self.current_density_yz[-2:] = 0
         self.current_density_x[0] = 0

@@ -40,7 +40,7 @@ individual_diagnostics = False
 category_name = "benchmark_run"
 # assert False
 class initial(Simulation):
-    def __init__(self, filename, n_macroparticles, n_cells):
+    def __init__(self, filename, n_macroparticles, n_cells, cores):
         """
         A simulation of laser-hydrogen shield interaction.
 
@@ -99,12 +99,12 @@ class initial(Simulation):
                          considered_large = True)
         print("Simulation prepared.")
 
-    def grid_species_initialization(self):
+    def grid_species_initialization(self, cores):
         for species in self.list_species:
             print(f"Distributing {species.name} nonuniformly.")
             species.distribute_uniformly(self.grid.L, 0,
                                          moat_length_left_side, moat_length_left_side)
         print("Finished initial distribution of particles.")
-        super().grid_species_initialization(False)
+        super().grid_species_initialization(cores, False)
         print("Finished initialization.")
 
