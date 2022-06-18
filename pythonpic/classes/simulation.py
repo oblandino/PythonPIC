@@ -12,8 +12,6 @@ from .species import load_species
 from ..helper_functions.helpers import report_progress, git_version, config_filename
 from ..visualization import animation, static_plots
 
-#oblandino
-import pymp
 
 current_time = time.strftime("%Y-%m-%d %H:%M")
 current_time_filename = time.strftime("%Y-%m-%d_%H-%M-%S")
@@ -117,17 +115,11 @@ class Simulation:
 
         """
         self.grid.apply_bc(i)
-
-        #oblandino
-        #with pymp.Parallel(2) as p:
         for species in self.list_species:
             species.velocity_push(self.grid.field_function, cores) # TODO should be inplace?
         self.grid.gather_charge(self.list_species)
         self.grid.gather_current(self.list_species, cores)
         self.grid.solve()
-
-        #oblandino
-        #with pymp.Parallel(2) as p:
         for species in self.list_species:
             species.position_push()
             self.grid.apply_particle_bc(species)
@@ -189,6 +181,7 @@ class Simulation:
             The simulation, for chaining purposes.
         """
         self.grid_species_initialization(cores)
+        self.NT = 584
         start_time = time.time()
         for i in range(self.NT):
             self.iteration_lite(i, cores)
