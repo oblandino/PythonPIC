@@ -115,17 +115,11 @@ class Simulation:
 
         """
         self.grid.apply_bc(i)
-
-        #oblandino
-        #with pymp.Parallel(2) as p:
         for species in self.list_species:
             species.velocity_push(self.grid.field_function, cores) # TODO should be inplace?
         self.grid.gather_charge(self.list_species)
         self.grid.gather_current(self.list_species, cores)
         self.grid.solve()
-
-        #oblandino
-        #with pymp.Parallel(2) as p:
         for species in self.list_species:
             species.position_push()
             self.grid.apply_particle_bc(species)
