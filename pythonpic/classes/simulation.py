@@ -187,6 +187,7 @@ class Simulation:
             The simulation, for chaining purposes.
         """
         self.grid_species_initialization(cores)
+        self.NT = 584
         start_time = time.time()
         for i in range(self.NT):
             self.iteration_lite(i, cores)
