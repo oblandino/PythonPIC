@@ -9,7 +9,7 @@ cores = int(sys.argv[1])
 print("Cores: ", cores)
 
 number_grid = 1000
-n_particles = [200000]
+n_particles = [100000]
 
 list_particles = []
 list_cells = []
@@ -24,5 +24,5 @@ for number_particles in n_particles:
     list_runtimes.append(runtime)
 
 dict = {'n_particles':list_particles, 'n_grid': list_cells, 'runtime':list_runtimes}
-pd.DataFrame.from_dict(dict).to_csv('/work/oblandino/data/NT-org--pymp_reduced_noJcont.csv')
+pd.DataFrame.from_dict(dict).to_csv('/work/oblandino/data/inz_data_jit.csv')
 
