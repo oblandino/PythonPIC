@@ -184,9 +184,12 @@ class Simulation:
         self.NT = 584
         start_time = time.time()
         for i in range(self.NT):
+            if (i==292):
+                self.runtime = time.time() - start_time
+                print("Initialization Runtime: ", self.runtime)
             self.iteration_lite(i, cores)
         self.runtime = time.time() - start_time
-        print("Runtime: ", self.runtime)
+        print("Complete Runtime: ", self.runtime)
         return self.runtime
 
     def lazy_run(self):
