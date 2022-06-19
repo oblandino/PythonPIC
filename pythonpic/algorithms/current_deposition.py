@@ -1,6 +1,5 @@
 # coding=utf-8
 import numpy as np
-#import torcpy as torc
 from numba import njit, prange, set_num_threads
 
 @njit(parallel=True)
@@ -64,7 +63,7 @@ def current_deposition(j_x, j_yz, velocity, x_particles, dx, dt, q):
         N = len(j_contribution)
         y_contribution_to_current_cell = np.ndarray(shape=(N), dtype='float64')
 
-        set_num_threads(4)
+        #set_num_threads(4)
 
         y_contribution_to_current_cell = current_contribution(j_contribution, w, N, y_contribution_to_current_cell)
 
