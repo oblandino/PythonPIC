@@ -2,12 +2,6 @@
 import numpy as np
 import torcpy as torc
 
-def init(_w_arr, _j_contribution_arr, _y_contribution_to_current_cell):
-    global w_arr, j_contribution_arr, y_contribution_to_current_cell
-    w_arr = _w_arr
-    j_contribution_arr = _j_contribution_arr
-    y_contribution_to_current_cell = _y_contribution_to_current_cell
-
 def calc(i):
     return w_arr[i]*j_contribution_arr[i]
 
@@ -75,9 +69,8 @@ def current_deposition(j_x, j_yz, velocity, x_particles, dx, dt, q):
         j_contribution_arr = np.ndarray(shape=(N), dtype='float64', buffer=(j_contribution))
         y_contribution_to_current_cell = np.ndarray(shape=(N), dtype='float64')
 
-        #print(y_contribution_to_current_cell)
-        torc.start(current_contribution)
-        #print(y_contribution_to_current_cell)
+        torc.init()
+        current_contribution()
 
         #y_contribution_to_current_cell = w * j_contribution[:,1]
         z_contribution_to_current_cell = w * j_contribution[:,2]
