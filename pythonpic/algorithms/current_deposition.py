@@ -3,13 +3,14 @@ import numpy as np
 import torcpy as torc
 
 def calc(i):
-    return w_arr[i]*j_contribution_arr[i]
+    return w_arr[i]*j_contribution[i,1]
 
 def current_contribution():
     data = range(N)
     return torc.map(calc, data)
 
 def current_deposition(j_x, j_yz, velocity, x_particles, dx, dt, q):
+    global N, w_arr, j_contribution
     epsilon = dx * 1e-10
     time = np.ones_like(x_particles) * dt
     active = np.any(velocity, axis=1)
@@ -61,11 +62,8 @@ def current_deposition(j_x, j_yz, velocity, x_particles, dx, dt, q):
 
         j_contribution = velocity * q / dt * time_in_this_iteration.reshape(x_velocity.size, 1)
 
-        global N, w_arr, j_contribution_arr, y_contribution_to_current_cell
-
         N = len(j_contribution)
         w_arr = np.ndarray(shape=(N), dtype='float64', buffer=w)
-        j_contribution_arr = np.ndarray(shape=(N), dtype='float64', buffer=(j_contribution))
 
         torc.init()
         y_contribution_to_current_cell = current_contribution()
