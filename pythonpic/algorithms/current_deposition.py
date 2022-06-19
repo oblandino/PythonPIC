@@ -2,14 +2,19 @@
 import numpy as np
 import torcpy as torc
 
-def init(_w_arr, _j_contribution_1, _y_contribution_to_current_cell):
-    global w_arr, j_contribution_1, y_contribution_to_current_cell
+def init(_w_arr, _j_contribution_arr, _y_contribution_to_current_cell):
+    global w_arr, j_contribution_arr, y_contribution_to_current_cell
     w_arr = _w_arr
-    j_contribution_1 = _j_contribution_1
+    j_contribution_arr = _j_contribution_arr
     y_contribution_to_current_cell = _y_contribution_to_current_cell
 
-def current_contribution(i):
-    y_contribution_to_current_cell[i] = w_arr[i] * j_contribution_1[i]
+def calc(i):
+    return w_arr[i]*j_contribution_arr[i]
+
+def current_contribution():
+    data = range(N)
+    y_contribution_to_current_cell = torc.map(calc, data)
+    return y_contribution_to_current_cell
 
 def current_deposition(j_x, j_yz, velocity, x_particles, dx, dt, q):
     epsilon = dx * 1e-10
@@ -63,14 +68,16 @@ def current_deposition(j_x, j_yz, velocity, x_particles, dx, dt, q):
 
         j_contribution = velocity * q / dt * time_in_this_iteration.reshape(x_velocity.size, 1)
 
-        N = len(j_contribution)
+        global N, w_arr, j_contribution_arr, y_contribution_to_current_cell
 
+        N = len(j_contribution)
         w_arr = np.ndarray(shape=(N), dtype='float64', buffer=w)
-        j_contribution_1 = np.ndarray(shape=(N), dtype='float64', buffer=(j_contribution[:,1]))
+        j_contribution_arr = np.ndarray(shape=(N), dtype='float64', buffer=(j_contribution))
         y_contribution_to_current_cell = np.ndarray(shape=(N), dtype='float64')
 
-        torc.init(initializer=init, initargs=(w_arr, j_contribution_1, y_contribution_to_current_cell))
-        torc.map(current_contribution, range(N))
+        #print(y_contribution_to_current_cell)
+        torc.start(current_contribution)
+        #print(y_contribution_to_current_cell)
 
         #y_contribution_to_current_cell = w * j_contribution[:,1]
         z_contribution_to_current_cell = w * j_contribution[:,2]
