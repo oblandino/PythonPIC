@@ -7,8 +7,7 @@ def calc(i):
 
 def current_contribution():
     data = range(N)
-    y_contribution_to_current_cell = torc.map(calc, data)
-    return y_contribution_to_current_cell
+    return torc.map(calc, data)
 
 def current_deposition(j_x, j_yz, velocity, x_particles, dx, dt, q):
     epsilon = dx * 1e-10
@@ -67,10 +66,10 @@ def current_deposition(j_x, j_yz, velocity, x_particles, dx, dt, q):
         N = len(j_contribution)
         w_arr = np.ndarray(shape=(N), dtype='float64', buffer=w)
         j_contribution_arr = np.ndarray(shape=(N), dtype='float64', buffer=(j_contribution))
-        y_contribution_to_current_cell = np.ndarray(shape=(N), dtype='float64')
 
         torc.init()
-        current_contribution()
+        y_contribution_to_current_cell = current_contribution()
+        torc.finalize()
 
         #y_contribution_to_current_cell = w * j_contribution[:,1]
         z_contribution_to_current_cell = w * j_contribution[:,2]
