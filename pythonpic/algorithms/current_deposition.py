@@ -1,21 +1,48 @@
 # coding=utf-8
 import numpy as np
 import torcpy as torc
+import threading
+import time
 
-def calc(i):
+global N, w_arr, j_contribution
+
+def work(x):
+    time.sleep(1)
+    y = x**2
+    print("work inp={:.3f}, out={:.3f} ...on node {:d} worker {} thread {}".format(x, y, torc.node_id(), torc.worker_id(), threading.get_ident()), flush=True)
+    return y
+
+def calc(i, w_arr, j_contribution):
     return w_arr[i]*j_contribution[i,1]
+
+def test():
+    ntasks = 4
+    sequence = range(1, ntasks + 1)
+
+    t0 = torc.gettime()
+    tasks = []
+    for i in sequence:
+        task = torc.submit(work, i)
+        tasks.append(task)
+    torc.wait()
+    t1 = torc.gettime()
+
+    for t in tasks:
+        print("Received: {}^2={:.3f}".format(t.input(), t.result()))
+
+    print("Elapsed time={:.2f} s".format(t1 - t0))
 
 def current_contribution():
     data = range(N)
     return torc.map(calc, data)
 
 def current_deposition(j_x, j_yz, velocity, x_particles, dx, dt, q):
-    global N, w_arr, j_contribution
     epsilon = dx * 1e-10
     time = np.ones_like(x_particles) * dt
     active = np.any(velocity, axis=1)
 
     while active.any():
+        global N, w_arr, j_contribution
         logical_coordinates_n = (x_particles // dx).astype(np.int32)
         particle_in_left_half = x_particles / dx - logical_coordinates_n < 0.5
         particle_in_right_half = ~particle_in_left_half
@@ -65,11 +92,14 @@ def current_deposition(j_x, j_yz, velocity, x_particles, dx, dt, q):
         N = len(j_contribution)
         w_arr = np.ndarray(shape=(N), dtype='float64', buffer=w)
 
-        torc.init()
-        y_contribution_to_current_cell = current_contribution()
-        torc.finalize()
+        #data = range(N)
+        #torc.map(calc, data, w_arr, j_contribution)
 
-        #y_contribution_to_current_cell = w * j_contribution[:,1]
+        test()
+
+        #y_contribution_to_current_cell = torc.start(current_contribution)
+
+        y_contribution_to_current_cell = w * j_contribution[:,1]
         z_contribution_to_current_cell = w * j_contribution[:,2]
         y_contribution_to_next_cell = (1 - w) * j_contribution[:,1]
         z_contribution_to_next_cell = (1 - w) * j_contribution[:,2]
