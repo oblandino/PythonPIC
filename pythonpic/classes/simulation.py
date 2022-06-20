@@ -164,6 +164,11 @@ class Simulation:
             exit()
 
     def run_lite_torc(self):
+        for i in range(self.NT):
+            self.iteration_lite(i)
+
+
+    def run_lite(self):
         """
         Run n iterations of the simulation, saving data as it goes.
 
@@ -181,20 +186,16 @@ class Simulation:
             The simulation, for chaining purposes.
         """
         self.grid_species_initialization()
-        self.NT = 295
+        self.NT = 584
         start_time = time.time()
-        for i in range(self.NT):
-            if (i==292):
-                self.runtime = time.time() - start_time
-                print("Initialization Runtime: ", self.runtime)
-            self.iteration_lite(i)
+
+        import torcpy
+        torcpy.start(self.run_lite_torc)
+        torcpy.finalize()
+
         self.runtime = time.time() - start_time
         print("Complete Runtime: ", self.runtime)
         return self.runtime
-
-    def run_lite(self):
-        import torcpy
-        torcpy.start(self.run_lite_torc)
 
     def lazy_run(self):
         """Does a simulation run() unless there's already a saved data with that file.
