@@ -191,7 +191,6 @@ class Simulation:
 
         import torcpy
         torcpy.start(self.run_lite_torc)
-        torcpy.finalize()
 
         self.runtime = time.time() - start_time
         print("Complete Runtime: ", self.runtime)
