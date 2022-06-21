@@ -38,3 +38,5 @@ Run PYMP and MP with fixed cores
 
 Run TORCPY
 	1. mpiexec -n 2 -x TORCPY_WORKERS=2 python configuration_scripts/benchmark.py 
+	2. Kabre: mpiexec -n 2 -env TORCPY_WORKERS=2 -hosts=dribe-06.cnca python configuration_scripts/benchmark.py 
+	3. mpiexec -n 4 -env TORCPY_WORKERS=2 --bind-to core --map-by core -hosts=dribe-06.cnca python configuration_scripts/benchmark.py 
