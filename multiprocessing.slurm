@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=mp8cores
-#SBATCH --output=mp_8cores_100k_opt_rev1.txt
+#SBATCH --output=mp_8cores_100k_opt_rev2.txt
 #SBATCH --partition=dribe --nodelist=dribe-06.cnca
 #SBATCH --ntasks=10
 #SBATCH --time=4:00:00

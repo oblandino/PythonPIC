@@ -8,7 +8,7 @@ Distributing electrons nonuniformly.
 Distributing protons nonuniformly.
 Finished initial distribution of particles.
 Finished initialization.
-Initialization Runtime:  20.64690113067627
+Initialization Runtime:  20.456852197647095
 crit density 9.847700361687113e+26
 Cores:  8
 Laser amplitude: 6.137836e+11
@@ -19,7 +19,7 @@ Distributing electrons nonuniformly.
 Distributing protons nonuniformly.
 Finished initial distribution of particles.
 Finished initialization.
-Initialization Runtime:  21.453782558441162
+Initialization Runtime:  21.10302233695984
 crit density 9.847700361687113e+26
 Cores:  8
 Laser amplitude: 6.137836e+11
@@ -30,7 +30,7 @@ Distributing electrons nonuniformly.
 Distributing protons nonuniformly.
 Finished initial distribution of particles.
 Finished initialization.
-Initialization Runtime:  21.744858741760254
+Initialization Runtime:  22.41536235809326
 crit density 9.847700361687113e+26
 Cores:  8
 Laser amplitude: 6.137836e+11
@@ -41,7 +41,7 @@ Distributing electrons nonuniformly.
 Distributing protons nonuniformly.
 Finished initial distribution of particles.
 Finished initialization.
-Initialization Runtime:  21.942076921463013
+Initialization Runtime:  22.658193826675415
 crit density 9.847700361687113e+26
 Cores:  8
 Laser amplitude: 6.137836e+11
@@ -52,7 +52,7 @@ Distributing electrons nonuniformly.
 Distributing protons nonuniformly.
 Finished initial distribution of particles.
 Finished initialization.
-Initialization Runtime:  22.152748107910156
+Initialization Runtime:  22.780460834503174
 crit density 9.847700361687113e+26
 Cores:  8
 Laser amplitude: 6.137836e+11
@@ -63,7 +63,7 @@ Distributing electrons nonuniformly.
 Distributing protons nonuniformly.
 Finished initial distribution of particles.
 Finished initialization.
-Initialization Runtime:  22.28319525718689
+Initialization Runtime:  22.71665930747986
 crit density 9.847700361687113e+26
 Cores:  8
 Laser amplitude: 6.137836e+11
@@ -74,7 +74,7 @@ Distributing electrons nonuniformly.
 Distributing protons nonuniformly.
 Finished initial distribution of particles.
 Finished initialization.
-Initialization Runtime:  22.517988920211792
+Initialization Runtime:  23.129932641983032
 crit density 9.847700361687113e+26
 Cores:  8
 Laser amplitude: 6.137836e+11
@@ -85,7 +85,7 @@ Distributing electrons nonuniformly.
 Distributing protons nonuniformly.
 Finished initial distribution of particles.
 Finished initialization.
-Initialization Runtime:  22.662396669387817
+Initialization Runtime:  23.50795578956604
 crit density 9.847700361687113e+26
 Cores:  8
 Laser amplitude: 6.137836e+11
@@ -96,7 +96,7 @@ Distributing electrons nonuniformly.
 Distributing protons nonuniformly.
 Finished initial distribution of particles.
 Finished initialization.
-Initialization Runtime:  22.82880210876465
+Initialization Runtime:  23.879469871520996
 crit density 9.847700361687113e+26
 Cores:  8
 Laser amplitude: 6.137836e+11
@@ -107,25 +107,25 @@ Distributing electrons nonuniformly.
 Distributing protons nonuniformly.
 Finished initial distribution of particles.
 Finished initialization.
-Initialization Runtime:  23.039869785308838
-Complete Runtime:  167.34813284873962
-100000,167.34813284873962
-Complete Runtime:  167.35533952713013
-100000,167.35533952713013
-Complete Runtime:  168.47740507125854
-100000,168.47740507125854
-Complete Runtime:  168.38851594924927
-100000,168.38851594924927
-Complete Runtime:  168.31421422958374
-100000,168.31421422958374
-Complete Runtime:  168.92167043685913
-100000,168.92167043685913
-Complete Runtime:  169.197039604187
-100000,169.197039604187
-Complete Runtime:  169.20008301734924
-100000,169.20008301734924
-Complete Runtime:  174.9164707660675
-100000,174.9164707660675
+Initialization Runtime:  24.312166452407837
+Complete Runtime:  167.0404851436615
+100000,167.0404851436615
+Complete Runtime:  167.21108484268188
+100000,167.21108484268188
+Complete Runtime:  167.32223773002625
+100000,167.32223773002625
+Complete Runtime:  167.43329524993896
+100000,167.43329524993896
+Complete Runtime:  166.87465405464172
+100000,166.87465405464172
+Complete Runtime:  167.28120279312134
+100000,167.28120279312134
+Complete Runtime:  168.66326189041138
+100000,168.66326189041138
+Complete Runtime:  168.98331141471863
+100000,168.98331141471863
+Complete Runtime:  168.96980214118958
+100000,168.96980214118958
 srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
-slurmstepd: error: *** STEP 54917.0 ON dribe-06.cnca CANCELLED AT 2022-06-23T00:43:28 ***
-slurmstepd: error: *** JOB 54917 ON dribe-06.cnca CANCELLED AT 2022-06-23T00:43:28 ***
+slurmstepd: error: *** JOB 54918 ON dribe-06.cnca CANCELLED AT 2022-06-23T00:48:05 ***
+slurmstepd: error: *** STEP 54918.0 ON dribe-06.cnca CANCELLED AT 2022-06-23T00:48:06 ***
