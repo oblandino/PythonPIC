@@ -3,19 +3,14 @@ import numpy as np
 import multiprocessing
 from multiprocessing import Array
 
-def init(_w_arr, _j_contribution_1, _y_contribution_to_current_cell):
-    global w_arr, j_contribution_1, y_contribution_to_current_cell
-    w_arr = _w_arr
-    j_contribution_1 = _j_contribution_1
-    y_contribution_to_current_cell = _y_contribution_to_current_cell
-
 def current_contribution(i):
-    y_contribution_to_current_cell[i] = w_arr[i] * j_contribution_1[i]
+    y_contribution_to_current_cell[i] = w[i] * j_contribution[i,1]
 
 def current_deposition(j_x, j_yz, velocity, x_particles, dx, dt, q, cores):
     epsilon = dx * 1e-10
     time = np.ones_like(x_particles) * dt
     active = np.any(velocity, axis=1)
+    global w, j_contribution, y_contribution_to_current_cell
 
     while active.any():
         logical_coordinates_n = (x_particles // dx).astype(np.int32)
@@ -66,14 +61,10 @@ def current_deposition(j_x, j_yz, velocity, x_particles, dx, dt, q, cores):
 
         N = len(j_contribution)
 
-        w_arr = Array('f', w)
-        j_contribution_1 = Array('f', j_contribution[:,1])
         y_contribution_to_current_cell = Array('f', range(N))
 
-        with multiprocessing.Pool(processes=cores, initializer=init, initargs=(w_arr, j_contribution_1, y_contribution_to_current_cell)) as pool:
+        with multiprocessing.Pool(processes=cores) as pool:
             pool.map(current_contribution, range(N))
-            pool.close()
-            pool.join()
 
         #y_contribution_to_current_cell = w * j_contribution[:,1]
         z_contribution_to_current_cell = w * j_contribution[:,2]
