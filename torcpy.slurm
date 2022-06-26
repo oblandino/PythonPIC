@@ -6,4 +6,4 @@
 #SBATCH --time=4:00:00
 #SBATCH --exclusive
 
-srun mpiexec -n 2 -env TORCPY_WORKERS=2 --bind-to core --map-by core -hosts=dribe-06.cnca python configuration_scripts/benchmark.py
+mpiexec -n 2 -env TORCPY_WORKERS=2 --bind-to core --map-by core -hosts=dribe-06.cnca python configuration_scripts/benchmark.py
