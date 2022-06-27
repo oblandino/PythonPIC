@@ -1,9 +1,9 @@
 #!/bin/bash
-#SBATCH --job-name=pymp2cores
-#SBATCH --output=pymp_2cores_100k_rev2.txt
-#SBATCH --partition=dribe --nodelist=dribe-06.cnca
+#SBATCH --job-name=pymp16cores
+#SBATCH --output=pymp_16cores_400k_nu_rev1.txt
+#SBATCH --partition=nu --nodelist=nu-6d.cnca
 #SBATCH --ntasks=10
-#SBATCH --time=2:00:00
+#SBATCH --time=24:00:00
 #SBATCH --exclusive
 
-srun taskset --cpu-list 0-1 python ./configuration_scripts/benchmark.py 2
+srun taskset --cpu-list 0-15 python ./configuration_scripts/benchmark.py 16
