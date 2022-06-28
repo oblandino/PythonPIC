@@ -9,7 +9,7 @@ cores = int(sys.argv[1])
 print("Cores: ", cores)
 
 number_grid = 1000
-n_particles = [100000]
+n_particles = [int(sys.argv[2])]
 
 list_particles = []
 list_cells = []
