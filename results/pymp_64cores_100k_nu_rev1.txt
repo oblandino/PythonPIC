@@ -1,0 +1,130 @@
+crit density 9.847700361687113e+26
+Cores:  63
+Laser amplitude: 6.137836e+11
+99.9 grid cells per laser wavelength.
+Thermal velocity for this simulation should be on the order of 0.063c.
+Simulation prepared.
+Distributing electrons nonuniformly.
+Distributing protons nonuniformly.
+Finished initial distribution of particles.
+Finished initialization.
+Initialization Runtime:  87.33642935752869
+crit density 9.847700361687113e+26
+Cores:  63
+Laser amplitude: 6.137836e+11
+99.9 grid cells per laser wavelength.
+Thermal velocity for this simulation should be on the order of 0.063c.
+Simulation prepared.
+Distributing electrons nonuniformly.
+Distributing protons nonuniformly.
+Finished initial distribution of particles.
+Finished initialization.
+Initialization Runtime:  87.34883141517639
+crit density 9.847700361687113e+26
+Cores:  63
+Laser amplitude: 6.137836e+11
+99.9 grid cells per laser wavelength.
+Thermal velocity for this simulation should be on the order of 0.063c.
+Simulation prepared.
+Distributing electrons nonuniformly.
+Distributing protons nonuniformly.
+Finished initial distribution of particles.
+Finished initialization.
+Initialization Runtime:  87.53697323799133
+crit density 9.847700361687113e+26
+Cores:  63
+Laser amplitude: 6.137836e+11
+99.9 grid cells per laser wavelength.
+Thermal velocity for this simulation should be on the order of 0.063c.
+Simulation prepared.
+Distributing electrons nonuniformly.
+Distributing protons nonuniformly.
+Finished initial distribution of particles.
+Finished initialization.
+Initialization Runtime:  87.7513074874878
+crit density 9.847700361687113e+26
+Cores:  63
+Laser amplitude: 6.137836e+11
+99.9 grid cells per laser wavelength.
+Thermal velocity for this simulation should be on the order of 0.063c.
+Simulation prepared.
+Distributing electrons nonuniformly.
+Distributing protons nonuniformly.
+Finished initial distribution of particles.
+Finished initialization.
+Initialization Runtime:  87.66938328742981
+crit density 9.847700361687113e+26
+Cores:  63
+Laser amplitude: 6.137836e+11
+99.9 grid cells per laser wavelength.
+Thermal velocity for this simulation should be on the order of 0.063c.
+Simulation prepared.
+Distributing electrons nonuniformly.
+Distributing protons nonuniformly.
+Finished initial distribution of particles.
+Finished initialization.
+Initialization Runtime:  87.71682476997375
+crit density 9.847700361687113e+26
+Cores:  63
+Laser amplitude: 6.137836e+11
+99.9 grid cells per laser wavelength.
+Thermal velocity for this simulation should be on the order of 0.063c.
+Simulation prepared.
+Distributing electrons nonuniformly.
+Distributing protons nonuniformly.
+Finished initial distribution of particles.
+Finished initialization.
+Initialization Runtime:  87.88089275360107
+crit density 9.847700361687113e+26
+Cores:  63
+Laser amplitude: 6.137836e+11
+99.9 grid cells per laser wavelength.
+Thermal velocity for this simulation should be on the order of 0.063c.
+Simulation prepared.
+Distributing electrons nonuniformly.
+Distributing protons nonuniformly.
+Finished initial distribution of particles.
+Finished initialization.
+Initialization Runtime:  87.91385388374329
+crit density 9.847700361687113e+26
+Cores:  63
+Laser amplitude: 6.137836e+11
+99.9 grid cells per laser wavelength.
+Thermal velocity for this simulation should be on the order of 0.063c.
+Simulation prepared.
+Distributing electrons nonuniformly.
+Distributing protons nonuniformly.
+Finished initial distribution of particles.
+Finished initialization.
+Initialization Runtime:  87.91700720787048
+crit density 9.847700361687113e+26
+Cores:  63
+Laser amplitude: 6.137836e+11
+99.9 grid cells per laser wavelength.
+Thermal velocity for this simulation should be on the order of 0.063c.
+Simulation prepared.
+Distributing electrons nonuniformly.
+Distributing protons nonuniformly.
+Finished initial distribution of particles.
+Finished initialization.
+Initialization Runtime:  88.78353524208069
+Complete Runtime:  724.073367357254
+100000,724.073367357254
+Complete Runtime:  762.3870282173157
+100000,762.3870282173157
+Complete Runtime:  762.6893980503082
+100000,762.6893980503082
+Complete Runtime:  762.9949836730957
+100000,762.9949836730957
+Complete Runtime:  767.4705669879913
+100000,767.4705669879913
+Complete Runtime:  772.951910495758
+100000,772.951910495758
+Complete Runtime:  772.9880249500275
+100000,772.9880249500275
+Complete Runtime:  775.1579041481018
+100000,775.1579041481018
+Complete Runtime:  775.3998379707336
+100000,775.3998379707336
+Complete Runtime:  775.299756526947
+100000,775.299756526947
