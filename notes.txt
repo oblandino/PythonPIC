@@ -33,15 +33,6 @@ Kabre Commands
 	8. sinfo -p nu
 	9. Recommendation to use nu-6{a,b,c,d}.cnca 
 
-<<<<<<< HEAD
-Run PYMP and MP with fixed cores
-	1. taskset --cpu-list 0-3 python configuration_scripts/benchmark.py 4
-
-Run TORCPY
-	1. mpiexec -n 2 -x TORCPY_WORKERS=2 python configuration_scripts/benchmark.py 
-	2. Kabre: mpiexec -n 2 -env TORCPY_WORKERS=2 -hosts=dribe-06.cnca python configuration_scripts/benchmark.py 
-	3. mpiexec -n 4 -env TORCPY_WORKERS=2 --bind-to core --map-by core -hosts=dribe-06.cnca python configuration_scripts/benchmark.py 
-=======
 Run PYMP with fixed cores
 	1. taskset --cpu-list 0-3 python configuration_scripts/benchmark.py 4 100000
 
@@ -49,4 +40,3 @@ Run TORCPY
 	1. Pycharm: mpiexec -n 2 -x TORCPY_WORKERS=2 python configuration_scripts/benchmark.py 
 	2. Kabre: mpiexec -n 2 -env TORCPY_WORKERS=2 -hosts=dribe-06.cnca python configuration_scripts/benchmark.py 
 	3. Kabre: mpiexec -n 4 -env TORCPY_WORKERS=2 --bind-to core --map-by core -hosts=dribe-06.cnca python configuration_scripts/benchmark.py 
->>>>>>> main
