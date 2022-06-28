@@ -6,4 +6,4 @@
 #SBATCH --time=24:00:00
 #SBATCH --exclusive
 
-srun taskset --cpu-list 0-15 python ./configuration_scripts/benchmark.py 16
+srun taskset --cpu-list 0-15 python ./configuration_scripts/benchmark.py 16 400000
