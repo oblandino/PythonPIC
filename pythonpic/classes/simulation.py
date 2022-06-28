@@ -180,14 +180,14 @@ class Simulation:
         self: Simulation
             The simulation, for chaining purposes.
         """
-        self.grid_species_initialization(cores)
+        self.grid_species_initialization()
         self.NT = 584
         start_time = time.time()
         for i in range(self.NT):
             if (i==292):
                 self.runtime = time.time() - start_time
                 print("Initialization Runtime: ", self.runtime)
-            self.iteration_lite(i, cores)
+            self.iteration_lite(i)
         self.runtime = time.time() - start_time
         print("Complete Runtime: ", self.runtime)
         return self.runtime
