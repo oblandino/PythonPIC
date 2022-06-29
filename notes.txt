@@ -37,6 +37,7 @@ Run PYMP with fixed cores
 	1. taskset --cpu-list 0-3 python configuration_scripts/benchmark.py 4 100000
 
 Run TORCPY
+	mpiexec version: module load mpich/3.3.2-gcc-9.3.0
 	1. Pycharm: mpiexec -n 2 -x TORCPY_WORKERS=2 python configuration_scripts/benchmark.py 
 	2. Kabre: mpiexec -n 2 -env TORCPY_WORKERS=2 -hosts=dribe-06.cnca python configuration_scripts/benchmark.py 
 	3. Kabre: mpiexec -n 4 -env TORCPY_WORKERS=2 --bind-to core --map-by core -hosts=dribe-06.cnca python configuration_scripts/benchmark.py 
