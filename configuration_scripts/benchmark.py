@@ -3,9 +3,11 @@ from pythonpic.configs.benchmark_run import initial
 import numpy as np
 import itertools
 import pandas as pd
+import sys
+
 
 number_grid = 1000
-n_particles = [100]
+n_particles = [int(sys.argv[1])]
 
 list_particles = []
 list_cells = []
