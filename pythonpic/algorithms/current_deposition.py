@@ -60,7 +60,7 @@ def current_deposition(j_x, j_yz, velocity, x_particles, dx, dt, q):
         N = len(j_contribution)
 
         data = range(N)
-        y_contribution_to_current_cell = torc.map(current_contribution, data, w, j_contribution, chunksize=32)
+        y_contribution_to_current_cell = torc.map(current_contribution, data, w, j_contribution, chunksize=500)
 
         #y_contribution_to_current_cell = w * j_contribution[:,1]
         z_contribution_to_current_cell = w * j_contribution[:,2]
