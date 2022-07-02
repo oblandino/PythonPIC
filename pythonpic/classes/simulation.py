@@ -164,7 +164,11 @@ class Simulation:
             exit()
 
     def run_lite_torc(self):
+        start_time_for = time.time()
         for i in range(self.NT):
+            if (i==292):
+                self.runtime = time.time() - start_time_for
+                print("Initialization Runtime: ", self.runtime)
             self.iteration_lite(i)
 
 
