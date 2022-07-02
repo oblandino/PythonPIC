@@ -1,9 +1,9 @@
 #!/bin/bash
-#SBATCH --job-name=torcpy2cores
-#SBATCH --output=torcpy_2cores_10k.txt
-#SBATCH --partition=dribe --nodelist=dribe-06.cnca
-#SBATCH --ntasks=16
-#SBATCH --time=4:00:00
+#SBATCH --job-name=torcpy8dribe
+#SBATCH --output=torcpy_8cores_dribe_100k_rev1.txt
+#SBATCH --partition=dribe --nodelist=dribe-05.cnca
+#SBATCH --ntasks=10
+#SBATCH --time=24:00:00
 #SBATCH --exclusive
 
-mpiexec -n 2 -env TORCPY_WORKERS=2 --bind-to core --map-by core python configuration_scripts/benchmark.py
+mpiexec -n 8 -env TORCPY_WORKERS=1 --bind-to core --map-by core python configuration_scripts/benchmark.py 100000
