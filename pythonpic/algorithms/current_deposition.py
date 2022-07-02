@@ -2,15 +2,13 @@
 import numpy as np
 import torcpy as torc
 
-
-def current_contribution(i):
-    return w[i] * j_contribution[i,1]
+def current_contribution(i, w, j_contribution):
+    return w * j_contribution[1]
 
 def current_deposition(j_x, j_yz, velocity, x_particles, dx, dt, q):
     epsilon = dx * 1e-10
     time = np.ones_like(x_particles) * dt
     active = np.any(velocity, axis=1)
-    global w, j_contribution, y_contribution_to_current_cell
 
     while active.any():
         logical_coordinates_n = (x_particles // dx).astype(np.int32)
@@ -61,7 +59,8 @@ def current_deposition(j_x, j_yz, velocity, x_particles, dx, dt, q):
 
         N = len(j_contribution)
 
-        y_contribution_to_current_cell = torc.map(current_contribution, range(N))
+        data = range(N)
+        y_contribution_to_current_cell = torc.map(current_contribution, data, w, j_contribution, chunksize=32)
 
         #y_contribution_to_current_cell = w * j_contribution[:,1]
         z_contribution_to_current_cell = w * j_contribution[:,2]
