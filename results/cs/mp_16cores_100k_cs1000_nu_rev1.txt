@@ -1,0 +1,131 @@
+crit density 9.847700361687113e+26
+Cores:  16
+Laser amplitude: 6.137836e+11
+99.9 grid cells per laser wavelength.
+Thermal velocity for this simulation should be on the order of 0.063c.
+Simulation prepared.
+Distributing electrons nonuniformly.
+Distributing protons nonuniformly.
+Finished initial distribution of particles.
+Finished initialization.
+Initialization Runtime:  86.73582148551941
+crit density 9.847700361687113e+26
+Cores:  16
+Laser amplitude: 6.137836e+11
+99.9 grid cells per laser wavelength.
+Thermal velocity for this simulation should be on the order of 0.063c.
+Simulation prepared.
+Distributing electrons nonuniformly.
+Distributing protons nonuniformly.
+Finished initial distribution of particles.
+Finished initialization.
+Initialization Runtime:  86.78951215744019
+crit density 9.847700361687113e+26
+Cores:  16
+Laser amplitude: 6.137836e+11
+99.9 grid cells per laser wavelength.
+Thermal velocity for this simulation should be on the order of 0.063c.
+Simulation prepared.
+Distributing electrons nonuniformly.
+Distributing protons nonuniformly.
+Finished initial distribution of particles.
+Finished initialization.
+Initialization Runtime:  86.7993791103363
+crit density 9.847700361687113e+26
+Cores:  16
+Laser amplitude: 6.137836e+11
+99.9 grid cells per laser wavelength.
+Thermal velocity for this simulation should be on the order of 0.063c.
+Simulation prepared.
+Distributing electrons nonuniformly.
+Distributing protons nonuniformly.
+Finished initial distribution of particles.
+Finished initialization.
+Initialization Runtime:  87.15351510047913
+crit density 9.847700361687113e+26
+Cores:  16
+Laser amplitude: 6.137836e+11
+99.9 grid cells per laser wavelength.
+Thermal velocity for this simulation should be on the order of 0.063c.
+Simulation prepared.
+Distributing electrons nonuniformly.
+Distributing protons nonuniformly.
+Finished initial distribution of particles.
+Finished initialization.
+Initialization Runtime:  87.54606556892395
+crit density 9.847700361687113e+26
+Cores:  16
+Laser amplitude: 6.137836e+11
+99.9 grid cells per laser wavelength.
+Thermal velocity for this simulation should be on the order of 0.063c.
+Simulation prepared.
+Distributing electrons nonuniformly.
+Distributing protons nonuniformly.
+Finished initial distribution of particles.
+Finished initialization.
+Initialization Runtime:  87.5459258556366
+crit density 9.847700361687113e+26
+Cores:  16
+Laser amplitude: 6.137836e+11
+99.9 grid cells per laser wavelength.
+Thermal velocity for this simulation should be on the order of 0.063c.
+Simulation prepared.
+Distributing electrons nonuniformly.
+Distributing protons nonuniformly.
+Finished initial distribution of particles.
+Finished initialization.
+Initialization Runtime:  87.55442380905151
+crit density 9.847700361687113e+26
+Cores:  16
+Laser amplitude: 6.137836e+11
+99.9 grid cells per laser wavelength.
+Thermal velocity for this simulation should be on the order of 0.063c.
+Simulation prepared.
+Distributing electrons nonuniformly.
+Distributing protons nonuniformly.
+Finished initial distribution of particles.
+Finished initialization.
+Initialization Runtime:  87.6780514717102
+crit density 9.847700361687113e+26
+Cores:  16
+Laser amplitude: 6.137836e+11
+99.9 grid cells per laser wavelength.
+Thermal velocity for this simulation should be on the order of 0.063c.
+Simulation prepared.
+Distributing electrons nonuniformly.
+Distributing protons nonuniformly.
+Finished initial distribution of particles.
+Finished initialization.
+Initialization Runtime:  87.68880438804626
+crit density 9.847700361687113e+26
+Cores:  16
+Laser amplitude: 6.137836e+11
+99.9 grid cells per laser wavelength.
+Thermal velocity for this simulation should be on the order of 0.063c.
+Simulation prepared.
+Distributing electrons nonuniformly.
+Distributing protons nonuniformly.
+Finished initial distribution of particles.
+Finished initialization.
+Initialization Runtime:  88.21001529693604
+Complete Runtime:  964.3698332309723
+100000,964.3698332309723
+Complete Runtime:  966.3328340053558
+100000,966.3328340053558
+Complete Runtime:  966.631995677948
+100000,966.631995677948
+Complete Runtime:  967.3103225231171
+100000,967.3103225231171
+Complete Runtime:  969.0840027332306
+100000,969.0840027332306
+Complete Runtime:  969.7343807220459
+100000,969.7343807220459
+Complete Runtime:  970.310525894165
+100000,970.310525894165
+Complete Runtime:  972.0226867198944
+100000,972.0226867198944
+Complete Runtime:  973.0666420459747
+100000,973.0666420459747
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** STEP 55523.0 ON nu-6d.cnca CANCELLED AT 2022-07-04T14:08:26 ***
+slurmstepd: error: *** JOB 55523 ON nu-6d.cnca CANCELLED AT 2022-07-04T14:08:26 ***
