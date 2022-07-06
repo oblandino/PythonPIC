@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH --job-name=pymp4cores
-#SBATCH --output=pymp_4cores_800k_dribe_rev1.txt
-#SBATCH --partition=dribe --nodelist=dribe-05.cnca
+#SBATCH --job-name=pymp4c8k
+#SBATCH --output=pymp_4cores_800k_nu_rev1.txt
+#SBATCH --partition=nu --nodelist=nu-5b.cnca
 #SBATCH --ntasks=10
 #SBATCH --time=24:00:00
 #SBATCH --exclusive
