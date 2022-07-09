@@ -1,9 +1,9 @@
 #!/bin/bash
-#SBATCH --job-name=mp16c32k
-#SBATCH --output=mp_16cores_3200k_nu_rev1.txt
-#SBATCH --partition=nu --nodelist=nu-5b.cnca
+#SBATCH --job-name=mpi64c128k
+#SBATCH --output=mp_64cores_12800k_nu_rev2.txt
+#SBATCH --partition=nu --nodelist=nu-5a.cnca
 #SBATCH --ntasks=10
-#SBATCH --time=24:00:00
+#SBATCH --time=48:00:00
 #SBATCH --exclusive
 
-srun taskset --cpu-list 0-15 python ./configuration_scripts/benchmark.py 16 3200000
+srun taskset --cpu-list 0-63 python ./configuration_scripts/benchmark.py 64 12800000
