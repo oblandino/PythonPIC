@@ -147,7 +147,7 @@ class FullAnimation(Animation):
         charge_plot = ChargeDistributionPlot(self.S, charge_axes)
         density_plot = SpatialDistributionPlot(self.S, density_axis)
         iteration = IterationCounter(self.S, charge_axes)
-        current_plots = TripleCurrentPlot(self.S, current_axes)
+        #current_plots = TripleCurrentPlot(self.S, current_axes)
         field_plots = TripleFieldPlot(self.S, field_axes)
         poynting_plot = PoyntingFieldPlot(S, density_perturbation_axis)
 
@@ -155,7 +155,7 @@ class FullAnimation(Animation):
                  charge_plot,
                  density_plot,
                  iteration,
-                 current_plots,
+                 #current_plots,
                  poynting_plot,
                  field_plots]
         super().add_plots(plots)
@@ -249,7 +249,7 @@ class OneDimAnimation(Animation):
         density_plot = SpatialDistributionPlot(self.S, density_axis)
         charge_plot = ChargeDistributionPlot(self.S, charge_axis)
         iteration = IterationCounter(self.S, freq_axes)
-        current_plot = CurrentPlot(self.S, current_axis, 0)
+        #current_plot = CurrentPlot(self.S, current_axis, 0)
         field_plot = FieldPlot(self.S, field_axis, 0)
 
         plots += [
@@ -257,7 +257,7 @@ class OneDimAnimation(Animation):
                  density_plot,
                  charge_plot,
                  iteration,
-                 current_plot,
+                 #current_plot,
                  field_plot]
         super().add_plots(plots)
 
